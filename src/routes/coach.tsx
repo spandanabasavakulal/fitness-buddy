@@ -101,7 +101,7 @@ function Coach() {
         <div className="min-w-0">
           <h1 className="font-display text-xl font-bold sm:text-2xl">AI Fitness Coach</h1>
           <p className="text-xs text-muted-foreground">
-            Placeholder responses · AI-powered fitness coaching with IBM watsonx.ai
+             AI-powered fitness coaching with IBM watsonx.ai
           </p>
         </div>
       </div>
