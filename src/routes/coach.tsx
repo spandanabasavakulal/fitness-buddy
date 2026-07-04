@@ -28,12 +28,6 @@ const starters = [
   "Best stretch for tight hips",
 ];
 
-const canned = [
-  "Great question! A balanced routine mixes strength, cardio and mobility across the week. Start with 3 strength days and 2 cardio sessions.",
-  "For most active adults, aim for 1.2–2.0g of protein per kg of body weight, spread across meals.",
-  "Track small wins daily — a 10-minute walk still counts. Consistency beats intensity every time.",
-  "Hydration matters: sip water throughout the day rather than chugging it all at once.",
-];
 
 function Coach() {
   const [messages, setMessages] = useState<Message[]>([
@@ -107,7 +101,7 @@ function Coach() {
         <div className="min-w-0">
           <h1 className="font-display text-xl font-bold sm:text-2xl">AI Fitness Coach</h1>
           <p className="text-xs text-muted-foreground">
-            Placeholder responses · IBM Granite integration coming soon
+            Placeholder responses · AI-powered fitness coaching with IBM watsonx.ai
           </p>
         </div>
       </div>
