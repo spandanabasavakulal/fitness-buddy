@@ -56,24 +56,47 @@ function Coach() {
     inputRef.current?.focus();
   }, []);
 
-  const send = (text: string) => {
-    const t = text.trim();
-    if (!t || thinking) return;
-    const userMsg: Message = { id: crypto.randomUUID(), role: "user", text: t };
-    setMessages((m) => [...m, userMsg]);
-    setInput("");
-    setThinking(true);
-    setTimeout(() => {
-      const reply: Message = {
-        id: crypto.randomUUID(),
-        role: "assistant",
-        text: canned[Math.floor(Math.random() * canned.length)],
-      };
-      setMessages((m) => [...m, reply]);
-      setThinking(false);
-      inputRef.current?.focus();
-    }, 900);
+  const send = async (text: string) => {
+  const t = text.trim();
+  if (!t || thinking) return;
+
+  const userMsg: Message = {
+    id: crypto.randomUUID(),
+    role: "user",
+    text: t,
   };
+
+  setMessages((m) => [...m, userMsg]);
+  setInput("");
+  setThinking(true);
+
+  try {
+    const aiReply = await chatWithCoach({
+      data: { message: t },
+    });
+
+    const reply: Message = {
+      id: crypto.randomUUID(),
+      role: "assistant",
+      text: aiReply,
+    };
+
+    setMessages((m) => [...m, reply]);
+  } catch (error) {
+    console.error(error);
+
+    const reply: Message = {
+      id: crypto.randomUUID(),
+      role: "assistant",
+      text: "Sorry, IBM Granite is temporarily unavailable.",
+    };
+
+    setMessages((m) => [...m, reply]);
+  }
+
+  setThinking(false);
+  inputRef.current?.focus();
+};
 
   return (
     <div className="mx-auto flex h-[calc(100vh-3.5rem)] w-full max-w-4xl flex-col px-4 py-6 sm:px-6">
